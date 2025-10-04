@@ -6,7 +6,7 @@ import { SearchBar } from './components/SearchBar';
 import { InfoSection } from './components/InfoSection';
 import { Footer } from './components/Footer';
 import { QuickQuote } from './components/QuickQuote';
-import { Loader2, AlertCircle } from 'lucide-react';
+import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -100,7 +100,20 @@ function App() {
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <SearchBar value={searchQuery} onChange={setSearchQuery} />
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex-1">
+            <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          </div>
+          <button
+            onClick={loadProducts}
+            disabled={loading}
+            className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Reload prices from CSV"
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            Reload Prices
+          </button>
+        </div>
 
         <InfoSection />
 
