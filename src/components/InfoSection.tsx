@@ -1,6 +1,9 @@
-import { AlertCircle, User } from 'lucide-react';
+import { AlertCircle, User, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
 
 export function InfoSection() {
+  const [isNotesExpanded, setIsNotesExpanded] = useState(false);
+
   const notes = [
     'All pricing is GST exclusive',
     'Minimum Order Prices quoted are Ex Goondiwindi Only and Ex Freight',
@@ -15,19 +18,33 @@ export function InfoSection() {
 
   return (
     <div className="mb-8 space-y-6">
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <AlertCircle className="w-5 h-5 text-amber-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Important Notes</h3>
-        </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-          {notes.map((note, index) => (
-            <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
-              <span className="text-amber-600 mt-1">•</span>
-              <span>{note}</span>
-            </li>
-          ))}
-        </ul>
+      <div className="bg-amber-50 border border-amber-200 rounded-lg overflow-hidden">
+        <button
+          onClick={() => setIsNotesExpanded(!isNotesExpanded)}
+          className="w-full p-6 flex items-center justify-between hover:bg-amber-100 transition-colors"
+        >
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-5 h-5 text-amber-600" />
+            <h3 className="text-lg font-semibold text-gray-900">Important Notes</h3>
+          </div>
+          {isNotesExpanded ? (
+            <ChevronUp className="w-5 h-5 text-amber-600" />
+          ) : (
+            <ChevronDown className="w-5 h-5 text-amber-600" />
+          )}
+        </button>
+        {isNotesExpanded && (
+          <div className="px-6 pb-6">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+              {notes.map((note, index) => (
+                <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                  <span className="text-amber-600 mt-1">•</span>
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className="bg-white border border-gray-200 rounded-lg p-6">
