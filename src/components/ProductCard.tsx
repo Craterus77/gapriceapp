@@ -1,11 +1,12 @@
 import { Product } from '../lib/data';
-import { Package } from 'lucide-react';
+import { Package, FileText } from 'lucide-react';
 
 interface ProductCardProps {
   products: Product[];
+  onQuoteClick: (product?: Product) => void;
 }
 
-export function ProductCard({ products }: ProductCardProps) {
+export function ProductCard({ products, onQuoteClick }: ProductCardProps) {
   const formatCurrency = (value: number) => {
     if (value === 0) return 'N/A';
     return `$${value.toFixed(2)}`;
@@ -44,8 +45,8 @@ export function ProductCard({ products }: ProductCardProps) {
             <h3 className="text-2xl font-bold text-gray-900">{productName}</h3>
             <p className="text-sm text-gray-600 mt-1">{description}</p>
           </div>
-          {logoUrl && (
-            <div className="ml-4 flex-shrink-0">
+          <div className="ml-4 flex-shrink-0 flex items-start gap-3">
+            {logoUrl && (
               <img
                 src={logoUrl}
                 alt={`${productName} logo`}
@@ -54,8 +55,15 @@ export function ProductCard({ products }: ProductCardProps) {
                   e.currentTarget.style.display = 'none';
                 }}
               />
-            </div>
-          )}
+            )}
+            <button
+              onClick={() => onQuoteClick(products[0])}
+              className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors shadow-sm font-medium text-sm"
+            >
+              <FileText className="w-4 h-4" />
+              Quick Quote
+            </button>
+          </div>
         </div>
 
         <div className="overflow-x-auto">

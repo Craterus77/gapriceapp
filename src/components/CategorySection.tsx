@@ -3,9 +3,10 @@ import { ProductCard } from './ProductCard';
 
 interface CategorySectionProps {
   productGroups: Record<string, Product[]>;
+  onQuoteClick: (product?: Product) => void;
 }
 
-export function CategorySection({ productGroups }: CategorySectionProps) {
+export function CategorySection({ productGroups, onQuoteClick }: CategorySectionProps) {
   const productNames = Object.keys(productGroups);
 
   if (productNames.length === 0) {
@@ -19,7 +20,11 @@ export function CategorySection({ productGroups }: CategorySectionProps) {
   return (
     <div className="space-y-6">
       {productNames.map((productName) => (
-        <ProductCard key={productName} products={productGroups[productName]} />
+        <ProductCard
+          key={productName}
+          products={productGroups[productName]}
+          onQuoteClick={onQuoteClick}
+        />
       ))}
     </div>
   );

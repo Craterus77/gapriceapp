@@ -5,6 +5,7 @@ import { CategorySection } from './components/CategorySection';
 import { SearchBar } from './components/SearchBar';
 import { InfoSection } from './components/InfoSection';
 import { Footer } from './components/Footer';
+import { QuickQuote } from './components/QuickQuote';
 import { Loader2, AlertCircle } from 'lucide-react';
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [quoteProduct, setQuoteProduct] = useState<Product | null>(null);
+  const [showQuote, setShowQuote] = useState(false);
 
   useEffect(() => {
     loadProducts();
@@ -82,6 +85,16 @@ function App() {
     );
   }
 
+  const handleOpenQuote = (product?: Product) => {
+    setQuoteProduct(product || null);
+    setShowQuote(true);
+  };
+
+  const handleCloseQuote = () => {
+    setShowQuote(false);
+    setQuoteProduct(null);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -99,10 +112,18 @@ function App() {
           </div>
         )}
 
-        <CategorySection productGroups={groupedProducts} />
+        <CategorySection productGroups={groupedProducts} onQuoteClick={handleOpenQuote} />
       </main>
 
       <Footer />
+
+      {showQuote && (
+        <QuickQuote
+          products={products}
+          initialProduct={quoteProduct || undefined}
+          onClose={handleCloseQuote}
+        />
+      )}
     </div>
   );
 }
