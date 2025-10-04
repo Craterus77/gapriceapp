@@ -12,7 +12,7 @@ export function CategorySection({ productGroups, onQuoteClick }: CategorySection
   if (productNames.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">No products found matching your search.</p>
+        <p className="text-gray-400">No products found matching your search.</p>
       </div>
     );
   }

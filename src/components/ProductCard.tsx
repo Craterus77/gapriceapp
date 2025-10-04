@@ -33,7 +33,7 @@ export function ProductCard({ products, onQuoteClick }: ProductCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+    <div className="bg-gray-800 rounded-lg shadow-md border border-gray-700 hover:shadow-lg hover:border-gray-600 transition-all duration-200">
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
@@ -43,8 +43,8 @@ export function ProductCard({ products, onQuoteClick }: ProductCardProps) {
                 {category}
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">{productName}</h3>
-            <p className="text-sm text-gray-600 mt-1">{description}</p>
+            <h3 className="text-2xl font-bold text-white">{productName}</h3>
+            <p className="text-sm text-gray-400 mt-1">{description}</p>
           </div>
           <div className="ml-4 flex-shrink-0 flex items-start gap-3">
             {logoUrl && (
@@ -70,31 +70,31 @@ export function ProductCard({ products, onQuoteClick }: ProductCardProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-light-gray">
-                <th className="text-left py-3 px-2 font-semibold text-charcoal">Size (L)</th>
-                <th className="text-left py-3 px-2 font-semibold text-charcoal">Pack Qty</th>
-                <th className="text-right py-3 px-2 font-semibold text-charcoal bg-primary/10">MOQ Price</th>
-                <th className="text-right py-3 px-2 font-semibold text-charcoal bg-primary/20">Pallet Price</th>
-                <th className="text-center py-3 px-2 font-semibold text-charcoal">Per Pallet</th>
-                <th className="text-right py-3 px-2 font-semibold text-charcoal">Retail Price</th>
-                <th className="text-right py-3 px-2 font-semibold text-charcoal">$/L</th>
+              <tr className="border-b border-gray-700">
+                <th className="text-left py-3 px-2 font-semibold text-gray-300">Size (L)</th>
+                <th className="text-left py-3 px-2 font-semibold text-gray-300">Pack Qty</th>
+                <th className="text-right py-3 px-2 font-semibold text-gray-300 bg-primary/10">MOQ Price</th>
+                <th className="text-right py-3 px-2 font-semibold text-gray-300 bg-primary/20">Pallet Price</th>
+                <th className="text-center py-3 px-2 font-semibold text-gray-300">Per Pallet</th>
+                <th className="text-right py-3 px-2 font-semibold text-gray-300">Retail Price</th>
+                <th className="text-right py-3 px-2 font-semibold text-gray-300">$/L</th>
               </tr>
             </thead>
             <tbody>
               {products.map((product, index) => (
                 <tr
                   key={product.id}
-                  className={`border-b border-gray-100 hover:bg-light-gray/20 ${index % 2 === 0 ? 'bg-white' : 'bg-light-gray/10'}`}
+                  className={`border-b border-gray-700 hover:bg-gray-700/50 ${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-800/50'}`}
                 >
-                  <td className="py-3 px-2 font-medium text-charcoal">{product.piece_size_lt}</td>
-                  <td className="py-3 px-2 text-charcoal">{product.pieces_per_pack}</td>
-                  <td className="py-3 px-2 text-right text-charcoal bg-primary/5">{formatCurrencyWhole(product.moq_piece_price)}</td>
-                  <td className="py-3 px-2 text-right text-charcoal bg-primary/10">{formatCurrencyWhole(product.per_pack_pallet_price)}</td>
-                  <td className="py-3 px-2 text-center text-charcoal">{product.pack_per_pallet_qty}</td>
-                  <td className="py-3 px-2 text-right text-charcoal">
+                  <td className="py-3 px-2 font-medium text-white">{product.piece_size_lt}</td>
+                  <td className="py-3 px-2 text-gray-300">{product.pieces_per_pack}</td>
+                  <td className="py-3 px-2 text-right text-white bg-primary/5">{formatCurrencyWhole(product.moq_piece_price)}</td>
+                  <td className="py-3 px-2 text-right text-white bg-primary/10">{formatCurrencyWhole(product.per_pack_pallet_price)}</td>
+                  <td className="py-3 px-2 text-center text-gray-300">{product.pack_per_pallet_qty}</td>
+                  <td className="py-3 px-2 text-right text-white">
                     {formatCurrencyWhole(product.rec_retail_price)}
                   </td>
-                  <td className="py-3 px-2 text-right text-gray-600">
+                  <td className="py-3 px-2 text-right text-gray-400">
                     {product.rec_retail_price_per_l > 0 ? formatCurrency(product.rec_retail_price_per_l) : 'N/A'}
                   </td>
                 </tr>
