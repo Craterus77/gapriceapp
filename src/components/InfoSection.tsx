@@ -47,33 +47,33 @@ export function InfoSection() {
         )}
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-lg p-6">
+      <div className="bg-white border border-light-gray rounded-lg p-6">
         <div className="flex items-center gap-2 mb-4">
-          <User className="w-5 h-5 text-green-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Contact Our Team</h3>
+          <User className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold text-charcoal">Contact Our Team</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <h4 className="font-semibold text-gray-900 mb-2">Regional Sales Representative</h4>
+            <h4 className="font-semibold text-charcoal mb-2">Regional Sales Representative</h4>
             <p className="text-sm text-gray-700">Sharlene Roser</p>
-            <p className="text-sm text-green-600 font-medium">0459 570 537</p>
-            <a href="mailto:sharlene@growthag.com.au" className="text-sm text-green-600 hover:text-green-700">
+            <p className="text-sm text-primary font-medium">0459 570 537</p>
+            <a href="mailto:sharlene@growthag.com.au" className="text-sm text-primary hover:text-primary-dark">
               sharlene@growthag.com.au
             </a>
           </div>
           <div>
-            <h4 className="font-semibold text-gray-900 mb-2">Business Development Manager</h4>
+            <h4 className="font-semibold text-charcoal mb-2">Business Development Manager</h4>
             <p className="text-sm text-gray-700">Michael Cook</p>
-            <p className="text-sm text-green-600 font-medium">0447 502 520</p>
-            <a href="mailto:mcook@growthag.com.au" className="text-sm text-green-600 hover:text-green-700">
+            <p className="text-sm text-primary font-medium">0447 502 520</p>
+            <a href="mailto:mcook@growthag.com.au" className="text-sm text-primary hover:text-primary-dark">
               mcook@growthag.com.au
             </a>
           </div>
           <div>
-            <h4 className="font-semibold text-gray-900 mb-2">Technical Manager</h4>
+            <h4 className="font-semibold text-charcoal mb-2">Technical Manager</h4>
             <p className="text-sm text-gray-700">Felipe Dantas</p>
-            <p className="text-sm text-green-600 font-medium">0428 211 114</p>
-            <a href="mailto:felipe@growthag.com.au" className="text-sm text-green-600 hover:text-green-700">
+            <p className="text-sm text-primary font-medium">0428 211 114</p>
+            <a href="mailto:felipe@growthag.com.au" className="text-sm text-primary hover:text-primary-dark">
               felipe@growthag.com.au
             </a>
           </div>

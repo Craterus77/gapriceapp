@@ -92,14 +92,14 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="bg-green-600 text-white px-6 py-4 flex items-center justify-between">
+        <div className="bg-primary text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <FileText className="w-6 h-6" />
             <h2 className="text-2xl font-bold">Quick Quote</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-white hover:bg-green-700 rounded-full p-1 transition-colors"
+            className="text-white hover:bg-primary-dark rounded-full p-1 transition-colors"
           >
             <X className="w-6 h-6" />
           </button>
@@ -124,7 +124,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                           updateQuoteItem(item.id, { product: selectedProducts[0] });
                         }
                       }}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                       {productNames.map(name => (
                         <option key={name} value={name}>
@@ -147,7 +147,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                           updateQuoteItem(item.id, { product: selectedProduct });
                         }
                       }}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                       {productsByName[item.product.product_name]?.map(p => (
                         <option key={p.id} value={p.id}>
@@ -167,7 +167,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                       onChange={(e) =>
                         updateQuoteItem(item.id, { pricingLevel: e.target.value as 'moq' | 'pallet' | 'floor' })
                       }
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                       <option value="moq">MOQ Price</option>
                       <option value="pallet">Pallet Price</option>
@@ -186,7 +186,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                       onChange={(e) =>
                         updateQuoteItem(item.id, { quantity: parseInt(e.target.value) || 1 })
                       }
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -200,7 +200,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                     </div>
                     <div>
                       <span className="text-gray-600">Subtotal: </span>
-                      <span className="font-semibold text-green-600">{formatCurrency(getSubtotal(item))}</span>
+                      <span className="font-semibold text-primary">{formatCurrency(getSubtotal(item))}</span>
                     </div>
                   </div>
                   <button
@@ -217,7 +217,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
           {/* Add Item Button */}
           <button
             onClick={addQuoteItem}
-            className="mt-4 flex items-center gap-2 text-green-600 hover:text-green-700 font-medium transition-colors"
+            className="mt-4 flex items-center gap-2 text-primary hover:text-primary-dark font-medium transition-colors"
           >
             <Plus className="w-5 h-5" />
             Add Another Product
@@ -236,8 +236,8 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
               <span className="font-semibold text-gray-900">{formatCurrency(getGST())}</span>
             </div>
             <div className="flex justify-between text-lg border-t border-gray-300 pt-2">
-              <span className="font-bold text-gray-900">Total (Inc GST):</span>
-              <span className="font-bold text-green-600">{formatCurrency(getTotalIncGST())}</span>
+              <span className="font-bold text-charcoal">Total (Inc GST):</span>
+              <span className="font-bold text-primary">{formatCurrency(getTotalIncGST())}</span>
             </div>
           </div>
           <div className="mt-4 flex gap-3 justify-end">
@@ -249,7 +249,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
             </button>
             <button
               onClick={() => window.print()}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+              className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
             >
               Print Quote
             </button>
