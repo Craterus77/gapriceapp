@@ -44,7 +44,7 @@ function parseCSVLine(line: string): string[] {
 }
 
 async function loadProductData(): Promise<Product[]> {
-  const response = await fetch('/src/csv/Productpricelist25090.csv');
+  const response = await fetch('/Productpricelist25090.csv');
   const text = await response.text();
   const lines = text.split('\n').filter(line => line.trim());
 
