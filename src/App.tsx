@@ -7,8 +7,10 @@ import { InfoSection } from './components/InfoSection';
 import { Footer } from './components/Footer';
 import { QuickQuote } from './components/QuickQuote';
 import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { useTheme } from './context/ThemeContext';
 
 function App() {
+  const { theme } = useTheme();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -58,10 +60,10 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-charcoal flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-fern_green' : 'bg-gray-50'}`}>
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
-          <p className="text-gray-400">Loading product catalog...</p>
+          <Loader2 className={`w-12 h-12 animate-spin mx-auto mb-4 ${theme === 'dark' ? 'text-moss_green' : 'text-primary'}`} />
+          <p className={theme === 'dark' ? 'text-gray-200' : 'text-gray-600'}>Loading product catalog...</p>
         </div>
       </div>
     );
@@ -69,14 +71,14 @@ function App() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-charcoal flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-fern_green' : 'bg-gray-50'}`}>
         <div className="text-center max-w-md">
           <AlertCircle className="w-12 h-12 text-red-600 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-white mb-2">Error Loading Products</h2>
-          <p className="text-gray-400 mb-4">{error}</p>
+          <h2 className={`text-xl font-semibold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Error Loading Products</h2>
+          <p className={`mb-4 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-600'}`}>{error}</p>
           <button
             onClick={loadProducts}
-            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors"
+            className={`px-6 py-2 rounded-lg transition-colors ${theme === 'dark' ? 'bg-moss_green text-white hover:bg-moss_green-700' : 'bg-primary text-white hover:bg-primary-dark'}`}
           >
             Try Again
           </button>
@@ -96,7 +98,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-fern_green' : 'bg-gray-50'}`}>
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -107,7 +109,7 @@ function App() {
           <button
             onClick={loadProducts}
             disabled={loading}
-            className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${theme === 'dark' ? 'bg-moss_green text-white hover:bg-moss_green-700' : 'bg-primary text-white hover:bg-primary-dark'}`}
             title="Reload prices from CSV"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -119,8 +121,8 @@ function App() {
 
         {searchQuery && (
           <div className="mb-6 text-center">
-            <p className="text-gray-400">
-              Found <span className="font-semibold text-white">{Object.keys(groupedProducts).length}</span> products
+            <p className={theme === 'dark' ? 'text-gray-200' : 'text-gray-600'}>
+              Found <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{Object.keys(groupedProducts).length}</span> products
             </p>
           </div>
         )}

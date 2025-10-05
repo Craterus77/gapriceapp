@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, Plus, Trash2, FileText } from 'lucide-react';
 import { Product } from '../lib/data';
+import { useTheme } from '../context/ThemeContext';
 
 interface QuoteItem {
   id: string;
@@ -16,6 +17,7 @@ interface QuickQuoteProps {
 }
 
 export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProps) {
+  const { theme } = useTheme();
   const [quoteItems, setQuoteItems] = useState<QuoteItem[]>(
     initialProduct
       ? [{ id: crypto.randomUUID(), product: initialProduct, quantity: 1, pricingLevel: 'moq' }]
@@ -90,16 +92,22 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+      <div className={`rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col ${
+        theme === 'dark' ? 'bg-dark_green' : 'bg-white'
+      }`}>
         {/* Header */}
-        <div className="bg-primary text-white px-6 py-4 flex items-center justify-between">
+        <div className={`px-6 py-4 flex items-center justify-between ${
+          theme === 'dark' ? 'bg-moss_green text-white' : 'bg-primary text-white'
+        }`}>
           <div className="flex items-center gap-2">
             <FileText className="w-6 h-6" />
             <h2 className="text-2xl font-bold">Quick Quote</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-white hover:bg-primary-dark rounded-full p-1 transition-colors"
+            className={`rounded-full p-1 transition-colors ${
+              theme === 'dark' ? 'text-white hover:bg-moss_green-700' : 'text-white hover:bg-primary-dark'
+            }`}
           >
             <X className="w-6 h-6" />
           </button>
@@ -109,11 +117,13 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
         <div className="flex-1 overflow-y-auto p-6">
           <div className="space-y-4">
             {quoteItems.map((item, index) => (
-              <div key={item.id} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div key={item.id} className={`border rounded-lg p-4 ${
+                theme === 'dark' ? 'bg-dark_green-600 border-dark_green-700' : 'bg-gray-50 border-gray-200'
+              }`}>
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
                   {/* Product Select */}
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                       Product
                     </label>
                     <select
@@ -124,7 +134,11 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                           updateQuoteItem(item.id, { product: selectedProducts[0] });
                         }
                       }}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className={`w-full border rounded-md px-3 py-2 text-sm focus:ring-2 focus:border-transparent ${
+                        theme === 'dark'
+                          ? 'bg-dark_green border-dark_green-800 text-white focus:ring-moss_green'
+                          : 'bg-white border-gray-300 text-gray-900 focus:ring-primary'
+                      }`}
                     >
                       {productNames.map(name => (
                         <option key={name} value={name}>
@@ -136,7 +150,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
 
                   {/* Pack Size Select */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                       Pack Size
                     </label>
                     <select
@@ -147,7 +161,11 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                           updateQuoteItem(item.id, { product: selectedProduct });
                         }
                       }}
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className={`w-full border rounded-md px-3 py-2 text-sm focus:ring-2 focus:border-transparent ${
+                        theme === 'dark'
+                          ? 'bg-dark_green border-dark_green-800 text-white focus:ring-moss_green'
+                          : 'bg-white border-gray-300 text-gray-900 focus:ring-primary'
+                      }`}
                     >
                       {productsByName[item.product.product_name]?.map(p => (
                         <option key={p.id} value={p.id}>
@@ -159,7 +177,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
 
                   {/* Pricing Level */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                       Pricing Level
                     </label>
                     <select
@@ -167,7 +185,11 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                       onChange={(e) =>
                         updateQuoteItem(item.id, { pricingLevel: e.target.value as 'moq' | 'pallet' | 'floor' })
                       }
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className={`w-full border rounded-md px-3 py-2 text-sm focus:ring-2 focus:border-transparent ${
+                        theme === 'dark'
+                          ? 'bg-dark_green border-dark_green-800 text-white focus:ring-moss_green'
+                          : 'bg-white border-gray-300 text-gray-900 focus:ring-primary'
+                      }`}
                     >
                       <option value="moq">MOQ Price</option>
                       <option value="pallet">Pallet Price</option>
@@ -176,7 +198,7 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
 
                   {/* Quantity */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className={`block text-sm font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                       Quantity (packs)
                     </label>
                     <input
@@ -186,21 +208,27 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
                       onChange={(e) =>
                         updateQuoteItem(item.id, { quantity: parseInt(e.target.value) || 1 })
                       }
-                      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className={`w-full border rounded-md px-3 py-2 text-sm focus:ring-2 focus:border-transparent ${
+                        theme === 'dark'
+                          ? 'bg-dark_green border-dark_green-800 text-white focus:ring-moss_green'
+                          : 'bg-white border-gray-300 text-gray-900 focus:ring-primary'
+                      }`}
                     />
                   </div>
                 </div>
 
                 {/* Price Info Row */}
-                <div className="mt-4 flex items-center justify-between border-t border-gray-300 pt-4">
+                <div className={`mt-4 flex items-center justify-between border-t pt-4 ${
+                  theme === 'dark' ? 'border-dark_green-800' : 'border-gray-300'
+                }`}>
                   <div className="flex items-center gap-6 text-sm">
                     <div>
-                      <span className="text-gray-600">Unit Price: </span>
-                      <span className="font-semibold text-gray-900">{formatCurrency(getPrice(item))}</span>
+                      <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>Unit Price: </span>
+                      <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{formatCurrency(getPrice(item))}</span>
                     </div>
                     <div>
-                      <span className="text-gray-600">Subtotal: </span>
-                      <span className="font-semibold text-primary">{formatCurrency(getSubtotal(item))}</span>
+                      <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>Subtotal: </span>
+                      <span className={`font-semibold ${theme === 'dark' ? 'text-moss_green' : 'text-primary'}`}>{formatCurrency(getSubtotal(item))}</span>
                     </div>
                   </div>
                   <button
@@ -217,7 +245,9 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
           {/* Add Item Button */}
           <button
             onClick={addQuoteItem}
-            className="mt-4 flex items-center gap-2 text-primary hover:text-primary-dark font-medium transition-colors"
+            className={`mt-4 flex items-center gap-2 font-medium transition-colors ${
+              theme === 'dark' ? 'text-moss_green hover:text-moss_green-700' : 'text-primary hover:text-primary-dark'
+            }`}
           >
             <Plus className="w-5 h-5" />
             Add Another Product
@@ -225,31 +255,41 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
         </div>
 
         {/* Footer with Totals */}
-        <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
+        <div className={`border-t px-6 py-4 ${
+          theme === 'dark' ? 'border-dark_green-700 bg-dark_green-600' : 'border-gray-200 bg-gray-50'
+        }`}>
           <div className="max-w-md ml-auto space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Subtotal (Ex GST):</span>
-              <span className="font-semibold text-gray-900">{formatCurrency(getTotalExGST())}</span>
+              <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>Subtotal (Ex GST):</span>
+              <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{formatCurrency(getTotalExGST())}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">GST (10%):</span>
-              <span className="font-semibold text-gray-900">{formatCurrency(getGST())}</span>
+              <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>GST (10%):</span>
+              <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{formatCurrency(getGST())}</span>
             </div>
-            <div className="flex justify-between text-lg border-t border-gray-300 pt-2">
-              <span className="font-bold text-charcoal">Total (Inc GST):</span>
-              <span className="font-bold text-primary">{formatCurrency(getTotalIncGST())}</span>
+            <div className={`flex justify-between text-lg border-t pt-2 ${
+              theme === 'dark' ? 'border-dark_green-800' : 'border-gray-300'
+            }`}>
+              <span className={`font-bold ${theme === 'dark' ? 'text-white' : 'text-charcoal'}`}>Total (Inc GST):</span>
+              <span className={`font-bold ${theme === 'dark' ? 'text-moss_green' : 'text-primary'}`}>{formatCurrency(getTotalIncGST())}</span>
             </div>
           </div>
           <div className="mt-4 flex gap-3 justify-end">
             <button
               onClick={onClose}
-              className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+              className={`px-6 py-2 border rounded-lg transition-colors ${
+                theme === 'dark'
+                  ? 'border-dark_green-800 text-gray-300 hover:bg-dark_green-800'
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+              }`}
             >
               Close
             </button>
             <button
               onClick={() => window.print()}
-              className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
+              className={`px-6 py-2 text-white rounded-lg transition-colors font-medium ${
+                theme === 'dark' ? 'bg-moss_green hover:bg-moss_green-700' : 'bg-primary hover:bg-primary-dark'
+              }`}
             >
               Print Quote
             </button>

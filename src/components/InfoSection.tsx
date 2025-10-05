@@ -1,7 +1,9 @@
 import { AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 export function InfoSection() {
+  const { theme } = useTheme();
   const [isNotesExpanded, setIsNotesExpanded] = useState(false);
 
   const notes = [
@@ -18,27 +20,33 @@ export function InfoSection() {
 
   return (
     <div className="mb-8 space-y-6">
-      <div className="bg-amber-900/20 border border-amber-800/40 rounded-lg overflow-hidden">
+      <div className={`rounded-lg overflow-hidden border ${
+        theme === 'dark'
+          ? 'bg-amber-900/20 border-amber-800/40'
+          : 'bg-amber-50 border-amber-200'
+      }`}>
         <button
           onClick={() => setIsNotesExpanded(!isNotesExpanded)}
-          className="w-full p-6 flex items-center justify-between hover:bg-amber-900/30 transition-colors"
+          className={`w-full p-6 flex items-center justify-between transition-colors ${
+            theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-amber-100'
+          }`}
         >
           <div className="flex items-center gap-2">
-            <AlertCircle className="w-5 h-5 text-amber-500" />
-            <h3 className="text-lg font-semibold text-white">Important Notes</h3>
+            <AlertCircle className={`w-5 h-5 ${theme === 'dark' ? 'text-amber-500' : 'text-amber-600'}`} />
+            <h3 className={`text-lg font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Important Notes</h3>
           </div>
           {isNotesExpanded ? (
-            <ChevronUp className="w-5 h-5 text-amber-500" />
+            <ChevronUp className={`w-5 h-5 ${theme === 'dark' ? 'text-amber-500' : 'text-amber-600'}`} />
           ) : (
-            <ChevronDown className="w-5 h-5 text-amber-500" />
+            <ChevronDown className={`w-5 h-5 ${theme === 'dark' ? 'text-amber-500' : 'text-amber-600'}`} />
           )}
         </button>
         {isNotesExpanded && (
           <div className="px-6 pb-6">
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
               {notes.map((note, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm text-gray-300">
-                  <span className="text-amber-500 mt-1">•</span>
+                <li key={index} className={`flex items-start gap-2 text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <span className={`mt-1 ${theme === 'dark' ? 'text-amber-500' : 'text-amber-600'}`}>•</span>
                   <span>{note}</span>
                 </li>
               ))}
