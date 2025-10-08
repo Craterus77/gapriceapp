@@ -270,8 +270,11 @@ export function QuickQuote({ products, initialProduct, onClose }: QuickQuoteProp
             <div className={`flex justify-between text-lg border-t pt-2 ${
               theme === 'dark' ? 'border-dark_green-800' : 'border-gray-300'
             }`}>
-              <span className={`font-bold ${theme === 'dark' ? 'text-white' : 'text-charcoal'}`}>Total (Inc GST):</span>
+              <span className={`font-bold ${theme === 'dark' ? 'text-white' : 'text-charcoal'}`}>Total (Inc GST)*:</span>
               <span className={`font-bold ${theme === 'dark' ? 'text-moss_green' : 'text-primary'}`}>{formatCurrency(getTotalIncGST())}</span>
+            </div>
+            <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
+              * excludes Freight
             </div>
           </div>
           <div className="mt-4 flex gap-3 justify-end">

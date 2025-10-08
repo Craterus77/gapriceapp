@@ -83,17 +83,17 @@ export function ProductCard({ products, onQuoteClick }: ProductCardProps) {
           <table className="w-full text-sm">
             <thead>
               <tr className={`border-b ${theme === 'dark' ? 'border-dark_green-600' : 'border-gray-200'}`}>
-                <th className={`text-left py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Size (L)</th>
-                <th className={`text-left py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Pack Qty</th>
+                <th className={`text-left py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>PIECE Size (Lt)</th>
+                <th className={`text-left py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Pieces per PACK (1 pack MOQ)</th>
                 <th className={`text-right py-3 px-2 font-semibold ${
                   theme === 'dark' ? 'text-gray-300 bg-moss_green/10' : 'text-gray-700 bg-primary/10'
-                }`}>MOQ Price</th>
+                }`}>MOQ PIECE PRICE</th>
                 <th className={`text-right py-3 px-2 font-semibold ${
                   theme === 'dark' ? 'text-gray-300 bg-moss_green/20' : 'text-gray-700 bg-primary/20'
-                }`}>Pallet Price</th>
-                <th className={`text-center py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Per Pallet</th>
-                <th className={`text-right py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Retail Price</th>
-                <th className={`text-right py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>$/L</th>
+                }`}>DISCOUNTED PRICE</th>
+                <th className={`text-center py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Minimum pack order for discounted price</th>
+                <th className={`text-right py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Rec Retail Price</th>
+                <th className={`text-right py-3 px-2 font-semibold ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Rec Retail Price/L</th>
               </tr>
             </thead>
             <tbody>
